@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login SMK - Aplikasi Sekolah</title>
+    <!-- Memuat Tailwind CSS dari CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Konfigurasi Tailwind untuk menggunakan font Inter -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Mengatur background dengan gambar dan membuatnya responsif */
+        .bg-school {
+            background-image: url('bg.jpg'); /* Ganti URL ini dengan gambar sekolah Anda */
+            background-size: cover; /* Memastikan gambar menutupi seluruh area */
+            background-position: center; /* Memusatkan gambar */
+            background-repeat: no-repeat; /* Mencegah pengulangan gambar */
+            background-attachment: fixed; /* Membuat gambar latar belakang tetap saat discroll */
+        }
+    </style>
+</head>
+<body class="bg-school flex items-center justify-center min-h-screen p-4">
+    <!-- Overlay untuk meningkatkan kontras form login di atas background -->
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+
+    <!-- Kontainer utama form login -->
+    <div class="relative bg-white bg-opacity-90 backdrop-blur-sm p-8 md:p-10 rounded-2xl shadow-xl w-full max-w-sm sm:max-w-md lg:max-w-lg mx-auto transform transition-all duration-300 hover:scale-105">
+        <div class="text-center mb-8">
+            <!-- Area khusus untuk logo sekolah -->
+            <img src="logosmkdiponegorobanyuputih.jpeg" alt="Logo Sekolah" class="mx-auto h-24 w-24 sm:h-28 sm:w-28 rounded-full object-cover shadow-md mb-4 border-4 border-blue-500">
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-800 mb-2">Selamat Datang!</h1>
+            <p class="text-gray-600 text-base sm:text-lg">Silakan login ke akun Anda.</p>
+        </div>
+
+        <form id="loginForm">
+            <!-- Input untuk username/email -->
+            <div class="mb-5">
+                <label for="username" class="block text-gray-700 text-sm font-semibold mb-2">Username</label>
+                <input type="text" id="username" name="username" placeholder="Masukkan username Anda" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 text-base transition-all duration-200">
+            </div>
+
+            <!-- Input untuk password -->
+            <div class="mb-6">
+                <label for="password" class="block text-gray-700 text-sm font-semibold mb-2">Password</label>
+                <input type="password" id="password" name="password" placeholder="Masukkan password Anda" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 text-base transition-all duration-200">
+            </div>
+
+            <!-- Pesan kesalahan login -->
+            <div id="errorMessage" class="text-red-500 text-sm text-center mb-4 hidden"></div>
+
+            <!-- Tombol login -->
+            <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg transition-all duration-300 ease-in-out transform hover:scale-105 shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75">
+                Login
+            </button>
+        </form>
+    </div>
+
+    <script>
+        // Mendapatkan referensi ke form dan elemen pesan kesalahan
+        const loginForm = document.getElementById('loginForm');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const errorMessage = document.getElementById('errorMessage');
+
+        // Daftar pengguna dan halaman tujuan mereka
+        const users = {
+            'AHMAD NUR KHAFID': 'MURID/ahmadnurkhafid.html',
+            'ALAN HAFIZ EKA APRIDITYA': 'MURID/alanhafizekaapriditya.html',
+            'ALYSSA MAISARAH': 'MURID/alyssamaisarah.html',
+            'ANGGA SAPUTRA': 'MURID/anggasaputra.html',
+            'ARGA DWI ANDIKA': 'MURID/argadwiandika.html',
+            'FAHZA MAULANA IRHAMDI': 'MURID/fahzamaulanairhamdi.html',
+            'MARCEL DWI SAPUTRA': 'MURID/marceldwisaputra.html',
+            'MUHAMAD TEGAR SATRIYO': 'MURID/muhamadtegarsatriyo.html',
+            'NOVALIA AMELDA SHOFA': 'MURID/novaliaameldashofa.html',
+            'SAFITRI RISKIATUL ALYA': 'MURID/safitririskiatulalya.html',
+            'SANIA LAILI NAJWA': 'MURID/sanialailinajwa.html',
+            'SYAKIRA SYIFA YUMNA YUMAZZA': 'MURID/syakirasyifayumnayumazza.html',
+            'TOHA MUSTAGHFIRIN': 'MURID/tohamustaghfirin.html'
+        };
+
+        const commonPassword = 'BISMILLAH'; // Password umum untuk semua pengguna
+
+        // Menangani submit form
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah form submit secara default
+
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            // Sembunyikan pesan kesalahan sebelumnya
+            errorMessage.classList.add('hidden');
+            errorMessage.textContent = '';
+
+            // Validasi login
+            if (users[username] && password === commonPassword) {
+                // Login berhasil, arahkan ke halaman yang sesuai
+                window.location.href = users[username];
+            } else {
+                // Login gagal, tampilkan pesan kesalahan
+                errorMessage.textContent = 'Username atau Password salah!';
+                errorMessage.classList.remove('hidden');
+            }
+        });
+    </script>
+</body>
+</html>
